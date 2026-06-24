@@ -21,6 +21,14 @@ create table if not exists responses (
   updated_at timestamptz not null default now()
 );
 
+-- Table privileges -----------------------------------------------------------
+-- Let the browser roles touch the tables at all. (Supabase usually grants this
+-- automatically, but we set it explicitly so setup never fails. The Row Level
+-- Security rules below are what actually decide who can do what.)
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete on public.events    to anon, authenticated;
+grant select, insert, update, delete on public.responses to anon, authenticated;
+
 -- Row Level Security ---------------------------------------------------------
 alter table events    enable row level security;
 alter table responses enable row level security;
