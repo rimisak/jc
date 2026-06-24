@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manage events · Who will come?</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="row">
+      <h1>Manage events</h1>
+      <div class="spacer"></div>
+      <button id="signOutBtn" class="secondary hidden">Sign out</button>
+    </div>
+
+    <!-- Login -->
+    <div id="loginCard" class="card hidden">
+      <h2>Host sign in</h2>
+      <p class="muted">Enter your email and we'll send you a one-time magic link.
+        Open it on this device to sign in.</p>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+      <div class="row" style="margin-top:12px">
+        <button id="sendLinkBtn">Send magic link</button>
+      </div>
+      <div id="loginMsg"></div>
+    </div>
+
+    <!-- Create event -->
+    <div id="createCard" class="card hidden">
+      <h2>Create an event</h2>
+      <label for="title">Title *</label>
+      <input type="text" id="title" placeholder="Summer BBQ" />
+      <label for="desc">Description</label>
+      <textarea id="desc" placeholder="Bring a friend!"></textarea>
+      <label for="dateText">When (free text)</label>
+      <input type="text" id="dateText" placeholder="Sat 12 Jul, 7pm" />
+      <div class="row" style="margin-top:12px">
+        <button id="createBtn">Create event</button>
+      </div>
+      <div id="createMsg"></div>
+    </div>
+
+    <!-- Event list -->
+    <div id="eventsSection" class="hidden">
+      <h2>Your events</h2>
+      <div id="eventsList"></div>
+    </div>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

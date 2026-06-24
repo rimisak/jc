@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your response · Who will come?</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div id="loading" class="card">Loading…</div>
+
+    <div id="content" class="hidden">
+      <h1 id="eventTitle"></h1>
+      <p id="eventWhen" class="muted"></p>
+      <p id="eventDesc"></p>
+
+      <div class="card">
+        <div id="confirm"></div>
+
+        <p class="muted">Change your answer:</p>
+        <div class="choice-buttons">
+          <button class="yes"   data-choice="yes">✅ I'm coming</button>
+          <button class="no"    data-choice="no">❌ I'm not coming</button>
+          <button class="maybe" data-choice="maybe">🤔 I don't know yet</button>
+        </div>
+
+        <label for="nameInput">Your name (optional — leave blank to stay anonymous)</label>
+        <div class="row">
+          <input type="text" id="nameInput" placeholder="Anonymous" style="flex:1" />
+          <button id="saveNameBtn" class="secondary">Save name</button>
+        </div>
+        <div id="nameMsg"></div>
+      </div>
+
+      <div class="card">
+        <h2>Live results</h2>
+        <div class="chart-box"><canvas id="pie"></canvas></div>
+        <div class="counts" style="justify-content:center">
+          <span class="pill"><span class="dot yes"></span> Coming: <b id="cYes">0</b></span>
+          <span class="pill"><span class="dot no"></span> Not coming: <b id="cNo">0</b></span>
+          <span class="pill"><span class="dot maybe"></span> Maybe: <b id="cMaybe">0</b></span>
+        </div>
+        <ul class="names" id="namesList"></ul>
+      </div>
+    </div>
+
+    <div id="errorCard" class="card hidden">
+      <div class="notice error" id="errorMsg"></div>
+    </div>
+  </div>
+
+  <script type="module" src="vote.js"></script>
+</body>
+</html>
