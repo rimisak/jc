@@ -140,7 +140,7 @@ async function loadEvents() {
         <span class="pill"><span class="dot maybe"></span> Maybe: <b>${t.maybe}</b></span>
       </div>
       <div class="row">
-        <button class="secondary copyBtn">Copy email HTML</button>
+        <button class="secondary copyBtn">Copy email buttons</button>
         <a class="ghost" href="vote.html?e=${ev.id}" target="_blank">Open results page ↗</a>
         <div class="spacer"></div>
         <button class="danger delBtn">Delete event</button>
@@ -155,16 +155,20 @@ async function loadEvents() {
     copyBtn.addEventListener('click', async () => {
       const html = embedHtml(ev.id);
       embedWrap.classList.remove('hidden');
-      embedWrap.innerHTML =
-        `<p class="muted" style="margin-top:12px">Paste this into your email (as HTML):</p>
-         <div class="embed">${escapeHtml(html)}</div>`;
-      try {
-        await navigator.clipboard.writeText(html);
-        copyBtn.textContent = 'Copied! ✅';
-        setTimeout(() => (copyBtn.textContent = 'Copy email HTML'), 1800);
-      } catch {
-        copyBtn.textContent = 'Select & copy below';
-      }
+      embedWrap.innerHTML = `
+        <p class="muted" style="margin-top:12px">Live preview — these are the buttons your guests will see.
+          You can also just select them here and copy (⌘C):</p>
+        <div class="preview">${html}</div>
+        <details style="margin-top:10px">
+          <summary class="muted" style="cursor:pointer">Show raw HTML code</summary>
+          <div class="embed">${escapeHtml(html)}</div>
+        </details>`;
+
+      const copiedRich = await copyRich(html);
+      copyBtn.textContent = copiedRich
+        ? 'Copied! Paste into your email ✅'
+        : 'Select the buttons above & copy';
+      setTimeout(() => (copyBtn.textContent = 'Copy email buttons'), 2500);
     });
 
     delBtn.addEventListener('click', async () => {
@@ -176,6 +180,24 @@ async function loadEvents() {
     });
 
     eventsList.appendChild(node);
+  }
+}
+
+// Put the buttons on the clipboard as RICH html, so pasting into Apple Mail
+// (or Gmail/Outlook) drops in the rendered, clickable buttons directly.
+// Falls back to copying nothing special if the browser blocks it (the user can
+// then select the live preview manually). Returns true on success.
+async function copyRich(html) {
+  try {
+    const item = new ClipboardItem({
+      'text/html':  new Blob([html], { type: 'text/html' }),
+      'text/plain': new Blob([html], { type: 'text/plain' }),
+    });
+    await navigator.clipboard.write([item]);
+    return true;
+  } catch {
+    try { await navigator.clipboard.writeText(html); } catch {}
+    return false;
   }
 }
 

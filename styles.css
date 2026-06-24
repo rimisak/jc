@@ -101,6 +101,13 @@ button.ghost     { background: transparent; color: #2563eb; padding: 6px 8px; }
   margin-top: 10px;
 }
 
+.preview {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 4px 12px;
+  background: #fff;
+}
+
 .hidden { display: none !important; }
 
 .notice {

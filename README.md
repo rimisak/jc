@@ -84,11 +84,13 @@ export const SUPABASE_ANON_KEY = 'PASTE_YOUR_ANON_PUBLIC_KEY_HERE';
 1. Go to **`https://rimisak.github.io/jc/admin.html`**.
 2. Enter your email → **Send magic link** → open the email on the same device → you're in.
 3. Fill in **Create an event** and click **Create event**.
-4. On the event in the list, click **Copy email HTML**. This copies ready-to-paste button
-   code to your clipboard.
-5. In your email program, compose your invitation and **paste** the buttons. Most email
-   clients (Gmail, Outlook, Apple Mail) paste it as real buttons. If yours pastes plain
-   text, look for an "Insert HTML" / "code" option, or use the snippet shown on screen.
+4. On the event in the list, click **Copy email buttons**. This copies the **rendered**
+   buttons to your clipboard (and shows a live preview).
+5. In your email program (Apple Mail, Gmail, Outlook), click in the message body and
+   **paste** (⌘V, *not* "Paste and Match Style"). The colored, clickable buttons drop
+   right in.
+   - If a client refuses the paste, select the buttons in the on-screen **preview** and
+     copy them, or expand **Show raw HTML code** to grab the source.
 6. Send it. As people click, watch the counts update on your admin page (and on the
    results page).
 
